@@ -1,12 +1,29 @@
 CREATE TABLE measurements (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     timestamp TEXT,
+
     rco2 REAL,
     atmp REAL,
     rhum REAL,
+
     tvocIndex REAL,
+    tvocRaw REAL,
+
     noxIndex REAL,
-    pm01 REAL,
-    pm02 REAL,
-    pm10 REAL
+    noxRaw REAL,
+
+    atm_pm01 REAL,
+    atm_pm02 REAL,
+    atm_pm10 REAL,
+
+    std_pm01 REAL,
+    std_pm02 REAL,
+    std_pm10 REAL,
+
+    count_03 REAL,
+    count_05 REAL,
+    count_10 REAL,
+    count_25 REAL,
+    count_50 REAL,
+    count_100 REAL
 );
