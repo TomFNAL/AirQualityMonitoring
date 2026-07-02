@@ -2,6 +2,16 @@ import serial
 import re
 import sqlite3
 from datetime import datetime
+import logging
+
+#Configure logging
+logging.basicConfig(
+    filename="/tmp/AirGradient/zmqServer.log",
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(message)s"
+)
+
+logger = logging.getLogger(__name__)
 
 ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1)
 
@@ -139,7 +149,7 @@ while True:
         # end of measurement frame
         insert(data, timestamp)
 
-        print(
+        logger.info(
             f"{timestamp} "
             f"CO2={data.get('rco2')} "
             f"T={data.get('atmp')} "
@@ -162,4 +172,27 @@ while True:
             f"CntPM10={data.get('count_100')}"
         )
 
-        data = {}
+#        print(
+#            f"{timestamp} "
+#            f"CO2={data.get('rco2')} "
+#            f"T={data.get('atmp')} "
+#            f"RH={data.get('rhum')} "
+#            f"TVOC={data.get('tvocIndex')} "
+#            f"TVOC_Raw={data.get('tvocRaw')} "
+#            f"NOx={data.get('noxIndex')} "
+#            f"NOx_Raw={data.get('noxRaw')} "
+#            f"AtmPM1.0={data.get('atm_pm01')} "
+#            f"AtmPM2.5={data.get('atm_pm02')} "
+#            f"AtmPM10={data.get('atm_pm10')} "
+#            f"StdPM1.0={data.get('std_pm01')} "
+#            f"StdPM2.5={data.get('std_pm02')} "
+#            f"StdPM10={data.get('std_pm10')} "
+#            f"CntPM0.3={data.get('count_03')} "
+#            f"CntPM0.5={data.get('count_05')} "
+#            f"CntPM1.0={data.get('count_10')} "
+#            f"CntPM2.5={data.get('count_25')} "
+#            f"CntPM5.0={data.get('count_50')} "
+#            f"CntPM10={data.get('count_100')}"
+#        )
+
+        data = {} 
